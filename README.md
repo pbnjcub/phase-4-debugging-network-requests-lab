@@ -62,12 +62,13 @@ developing your own process.
 
 - Add a new toy when the toy form is submitted
 
-  - How I debugged:
+  - How I debugged: When I pressed the Create New Toy, we have an internal server error 500. I also see a warning about each child in the list having a unique "key" prop. Checking the server terminal, I saw this error: NameError (uninitialized constant ToysController::Toys) app/controllers/toys_controller.rb:10:in `create'. So I looked at the toys_controller.rb file on line 10 and realized that Toys should be singular.
 
 - Update the number of likes for a toy
 
-  - How I debugged:
+  - How I debugged: when I pressed the like button for Woody, I checked the console and received an error message that stated "uncaught (in promise) SyntaxError: Unexpected enf of JSON input at ToyCard.js:27:1. I also checked the terminal for the server. The error says "Unpermitted parameter: :id. I looked at toy_params and it did not permit the :id parameter, so I added it. Pressing the like button again, I saw that there was no content returned and I realized that it was missing the following line:     render json: toy, status: :ok.
 
 - Donate a toy to Goodwill (and delete it from our database)
 
-  - How I debugged:
+
+  - How I debugged: When I pressed Donate to Goodwill button on Optimus Prime, the console said that DELETE was not found (404). Additionally the terminal for the server said the following: ActionController::RoutingError (No route matches [DELETE] "/toys/9"): I checked the routes file and the route for :destroy was missing. So I added the :destroy route.
